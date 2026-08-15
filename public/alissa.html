@@ -21,23 +21,24 @@
           class="sprite hide"
           src="alissa.png"
           alt="Alissa"
+          loading="eager"
         />
         <img
           id="char-santiago"
           class="sprite hide"
           src="santiago.png"
           alt="Santiago"
+          loading="eager"
         />
       </div>
 
       <div id="ui-layer">
+        <div id="chapter-title" class="chapter-title"></div>
         <div id="speaker-name"></div>
         <div id="dialog-box">
           <div id="dialog-text"></div>
         </div>
-        <div id="waiting-msg" class="hidden-block">
-          Aguardando a decisão do Santiago...
-        </div>
+        <div id="waiting-msg" class="waiting-msg hidden-block"></div>
         <div id="choices-container"></div>
       </div>
     </div>
