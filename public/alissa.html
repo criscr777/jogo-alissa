@@ -2,49 +2,29 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Alissa - O Mistério das Marés</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="sequential.css" />
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
     <div id="game-container">
       <div id="background"></div>
       <div id="vfx-overlay"></div>
-
       <div id="characters-layer">
-        <img
-          id="char-alissa"
-          class="sprite hide"
-          src="alissa.png"
-          alt="Alissa"
-          loading="eager"
-        />
-        <img
-          id="char-santiago"
-          class="sprite hide"
-          src="santiago.png"
-          alt="Santiago"
-          loading="eager"
-        />
+        <img id="char-alissa" class="sprite hide" src="alissa.png" alt="Alissa" loading="eager" />
+        <img id="char-santiago" class="sprite hide" src="santiago.png" alt="Santiago" loading="eager" />
       </div>
-
       <div id="ui-layer">
         <div id="chapter-title" class="chapter-title"></div>
         <div id="speaker-name"></div>
-        <div id="dialog-box">
-          <div id="dialog-text"></div>
-        </div>
+        <div id="dialog-box"><div id="dialog-text"></div></div>
         <div id="waiting-msg" class="waiting-msg hidden-block"></div>
         <div id="choices-container"></div>
       </div>
     </div>
-    <script>
-      const myRole = "alissa";
-    </script>
+    <script>const myRole = "alissa";</script>
     <script src="script.js"></script>
   </body>
 </html>
