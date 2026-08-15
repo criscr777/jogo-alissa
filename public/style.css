@@ -18,7 +18,7 @@ body {
     height: 100dvh; 
 }
 
-/* === TELA DE LOGIN / SELEÇÃO === */
+/* TELA DE LOGIN */
 #login-screen {
     position: fixed;
     top: 0; left: 0; 
@@ -43,23 +43,9 @@ body {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
 }
 
-.login-card h1 {
-    font-size: 1.5rem;
-    color: #ff79c6;
-    margin-bottom: 8px;
-}
-
-.login-card p {
-    font-size: 0.95rem;
-    color: #ccc;
-    margin-bottom: 20px;
-}
-
-.login-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
+.login-card h1 { font-size: 1.5rem; color: #ff79c6; margin-bottom: 8px; }
+.login-card p { font-size: 0.95rem; color: #ccc; margin-bottom: 20px; }
+.login-buttons { display: flex; flex-direction: column; gap: 12px; }
 
 .role-btn {
     padding: 14px;
@@ -73,17 +59,10 @@ body {
     text-align: center;
 }
 
-.alissa-btn {
-    background: linear-gradient(135deg, #ff79c6, #bd93f9);
-    color: #fff;
-}
+.alissa-btn { background: linear-gradient(135deg, #ff79c6, #bd93f9); color: #fff; }
+.santiago-btn { background: linear-gradient(135deg, #8be9fd, #50fa7b); color: #111; }
 
-.santiago-btn {
-    background: linear-gradient(135deg, #8be9fd, #50fa7b);
-    color: #111;
-}
-
-/* === JOGO PRINCIPAL === */
+/* JOGO PRINCIPAL */
 #game-container {
     position: relative;
     width: 100vw;
@@ -103,45 +82,39 @@ body {
     background-size: cover;
     background-position: center;
     z-index: 1;
-    animation: breathe 20s infinite alternate ease-in-out;
 }
 
-@keyframes breathe {
-    0% { transform: scale(1) translate(0px, 0px); }
-    100% { transform: scale(1.06) translate(-10px, 5px); }
-}
-
-/* Fundo mais claro para a praia aparecer bem */
+/* Fundo claro para destacar o cenário da praia */
 #vfx-overlay {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     z-index: 2; 
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.55) 80%);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.45) 85%);
 }
 
-.vfx-magic { background: radial-gradient(circle, rgba(0, 212, 255, 0.25) 0%, rgba(0,0,0,0.6) 100%) !important; }
-.vfx-romance { background: radial-gradient(circle, rgba(255, 105, 180, 0.3) 0%, rgba(0,0,0,0.65) 100%) !important; backdrop-filter: blur(1px); }
+.vfx-magic { background: radial-gradient(circle, rgba(0, 212, 255, 0.2) 0%, rgba(0,0,0,0.5) 100%) !important; }
+.vfx-romance { background: radial-gradient(circle, rgba(255, 105, 180, 0.25) 0%, rgba(0,0,0,0.55) 100%) !important; backdrop-filter: blur(1px); }
 
-/* === PERSONAGENS MAIORES E MAIS DINÂMICOS === */
+/* PERSONAGENS ENCAIXADOS NAS LATERAIS */
 #characters-layer {
     position: absolute;
-    bottom: 20vh;
+    bottom: 18vh;
     left: 0;
     width: 100%;
-    height: 58vh;
+    height: 62vh;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     z-index: 3;
-    padding: 0 2%;
+    padding: 0 5%;
     pointer-events: none;
 }
 
 .sprite {
-    width: 50%; /* Personagens maiores na tela */
+    width: 42%;
     height: 100%;
     object-fit: contain;
-    transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
-    filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.8));
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.8));
     opacity: 1;
 }
 
@@ -150,25 +123,18 @@ body {
 
 .hide { 
     opacity: 0 !important; 
-    transform: translateY(30px) scale(0.9) !important; 
+    transform: translateY(20px) scale(0.9) !important; 
 }
 
-/* Animações de movimento bem mais visíveis */
-.move-center-alissa { transform: translateX(12vw) scale(1.06); }
-.move-center-santiago { transform: translateX(-12vw) scale(1.06); }
+/* Movimentos proporcionais e naturais */
+.step-forward-alissa { transform: translateX(6vw) scale(1.03); }
+.step-forward-santiago { transform: translateX(-6vw) scale(1.03); }
+.step-back-alissa { transform: translateX(-4vw) scale(0.97); }
+.step-back-santiago { transform: translateX(4vw) scale(0.97); }
+.kiss-alissa { transform: translateX(16vw) scale(1.1); }
+.kiss-santiago { transform: translateX(-16vw) scale(1.1); }
 
-/* Cena do beijo: eles se aproximam bastante no centro da tela */
-.kiss-alissa { transform: translateX(25vw) scale(1.15); }
-.kiss-santiago { transform: translateX(-25vw) scale(1.15); }
-
-.shock { animation: shake 0.4s ease-in-out; }
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-8px); }
-    75% { transform: translateX(8px); }
-}
-
-/* === INTERFACE DE DIÁLOGO E BOTÕES === */
+/* INTERFACE DE DIÁLOGO */
 #ui-layer {
     position: relative;
     z-index: 10;
@@ -233,13 +199,9 @@ body {
     transform: scale(0.98);
 }
 
-@keyframes fadeIn { 
-    to { opacity: 1; } 
-}
+@keyframes fadeIn { to { opacity: 1; } }
 
-.hidden-block { 
-    display: none !important; 
-}
+.hidden-block { display: none !important; }
 
 #waiting-msg {
     font-size: 0.95rem;
