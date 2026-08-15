@@ -1,3 +1,4 @@
+// Render deploy repair: server-only entrypoint. Browser code belongs in public/script.js.
 const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
