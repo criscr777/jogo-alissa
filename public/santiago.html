@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Santiago - O Mistério das Marés</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <div id="game-container">
+      <div id="background"></div>
+      <div id="vfx-overlay"></div>
+
+      <div id="characters-layer">
+        <img
+          id="char-alissa"
+          class="sprite hide"
+          src="alissa.png"
+          alt="Alissa"
+        />
+        <img
+          id="char-santiago"
+          class="sprite hide"
+          src="santiago.png"
+          alt="Santiago"
+        />
+      </div>
+
+      <div id="ui-layer">
+        <div id="speaker-name"></div>
+        <div id="dialog-box">
+          <div id="dialog-text"></div>
+        </div>
+        <div id="waiting-msg" class="hidden-block">
+          Aguardando a decisão da Alissa...
+        </div>
+        <div id="choices-container"></div>
+      </div>
+    </div>
+    <script>
+      const myRole = "santiago";
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>

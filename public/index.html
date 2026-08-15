@@ -1,41 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Um Encontro Místico - Alissa & Santiago</title>
-    <!-- Arquivo de estilo -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Biblioteca do Socket.io para comunicação em tempo real -->
-    <script src="/socket.io/socket.io.js"></script>
-</head>
-<body>
-
-    <div id="game-container">
-        <!-- Fundo e Efeitos -->
-        <div id="background"></div>
-        <div id="vfx-overlay"></div>
-
-        <!-- Personagens -->
-        <div id="characters-layer">
-            <img id="char-alissa" class="sprite hide" src="alissa.png" alt="Alissa">
-            <img id="char-santiago" class="sprite hide" src="santiago.png" alt="Santiago">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>O Mistério das Marés - Alissa & Santiago</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="login-screen">
+      <div class="login-card">
+        <h1>Quem é você na jornada?</h1>
+        <p>Escolha o seu personagem para entrar no jogo:</p>
+        <div class="login-buttons">
+          <a href="alissa.html" class="role-btn alissa-btn"
+            >Entrar como Alissa</a
+          >
+          <a href="santiago.html" class="role-btn santiago-btn"
+            >Entrar como Santiago</a
+          >
         </div>
-
-        <!-- Interface -->
-        <div id="ui-layer">
-            <div id="speaker-name"></div>
-            <div id="dialog-box">
-                <div id="dialog-text"></div>
-            </div>
-            <!-- Mensagem de espera quando for a vez do outro jogador -->
-            <div id="waiting-msg" class="hidden-block">Aguardando a decisão do outro jogador...</div>
-            <div id="choices-container"></div>
-        </div>
+      </div>
     </div>
-
-    <!-- Lógica e história conectados ao Socket.io -->
-    <script src="script.js"></script>
-</body>
+  </body>
 </html>
-

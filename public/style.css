@@ -1,170 +1,306 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap");
 
-/* === ESTILOS GERAIS === */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
-
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Nunito', sans-serif; user-select: none; }
-body { background-color: #050510; overflow: hidden; color: #fff; }
-
-#game-container {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    overflow: hidden;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+  user-select: none;
+}
+body {
+  background-color: #050510;
+  overflow: hidden;
+  color: #fff;
+  width: 100vw;
+  height: 100vh;
 }
 
-/* === CAMADA DE FUNDO E EFEITOS === */
+/* TELA DE LOGIN / SELEÇÃO */
+#login-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle, #1a1a2e 0%, #050510 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  padding: 20px;
+}
+
+.login-card {
+  background: rgba(20, 20, 35, 0.95);
+  border: 2px solid #ff79c6;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.login-card h1 {
+  font-size: 1.6rem;
+  color: #ff79c6;
+  margin-bottom: 10px;
+}
+
+.login-card p {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 25px;
+}
+
+.login-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.role-btn {
+  padding: 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    background 0.2s;
+}
+
+.alissa-btn {
+  background: linear-gradient(135deg, #ff79c6, #bd93f9);
+  color: #fff;
+}
+
+.santiago-btn {
+  background: linear-gradient(135deg, #8be9fd, #50fa7b);
+  color: #111;
+}
+
+.role-btn:hover {
+  transform: scale(1.03);
+}
+
+/* JOGO */
+#game-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
 #background {
-    position: absolute;
-    top: -5%; left: -5%;
-    width: 110%; height: 110%;
-    background-image: url('praia_noite.jpg');
-    background-size: cover;
-    background-position: center;
-    z-index: 1;
-    transition: filter 2s ease, transform 10s ease-in-out;
-    animation: breathe 20s infinite alternate ease-in-out;
+  position: absolute;
+  top: -5%;
+  left: -5%;
+  width: 110%;
+  height: 110%;
+  background-image: url("praia_noite.png");
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+  transition:
+    filter 2s ease,
+    transform 10s ease-in-out;
+  animation: breathe 20s infinite alternate ease-in-out;
 }
 
 @keyframes breathe {
-    0% { transform: scale(1) translate(0px, 0px); }
-    100% { transform: scale(1.05) translate(-15px, 10px); }
+  0% {
+    transform: scale(1) translate(0px, 0px);
+  }
+  100% {
+    transform: scale(1.05) translate(-15px, 10px);
+  }
 }
 
 #vfx-overlay {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 2; transition: background 2s ease, backdrop-filter 2s ease;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  transition:
+    background 2s ease,
+    backdrop-filter 2s ease;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
 }
 
-/* Efeitos Visuais Ativados por Código */
-.vfx-magic { background: radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, rgba(0,0,0,0.8) 100%) !important; }
-.vfx-romance { background: radial-gradient(circle, rgba(255, 105, 180, 0.3) 0%, rgba(0,0,0,0.9) 100%) !important; backdrop-filter: blur(3px); }
+.vfx-magic {
+  background: radial-gradient(
+    circle,
+    rgba(0, 212, 255, 0.3) 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  ) !important;
+}
+.vfx-romance {
+  background: radial-gradient(
+    circle,
+    rgba(255, 105, 180, 0.3) 0%,
+    rgba(0, 0, 0, 0.9) 100%
+  ) !important;
+  backdrop-filter: blur(3px);
+}
 
-/* === CAMADA DE PERSONAGENS === */
 #characters-layer {
-    position: absolute;
-    bottom: 25%;
-    width: 100%;
-    height: 65%;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    z-index: 3;
-    padding: 0 5%;
-    pointer-events: none;
+  position: absolute;
+  bottom: 25%;
+  width: 100%;
+  height: 65%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  z-index: 3;
+  padding: 0 5%;
+  pointer-events: none;
 }
 
 .sprite {
-    height: 100%;
-    max-height: 80vh;
-    object-fit: contain;
-    transition: all 1s ease-in-out;
-    filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.6));
-    opacity: 1;
+  height: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  transition: all 1s ease-in-out;
+  filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.6));
+  opacity: 1;
 }
 
-#char-alissa { transform: translateX(0) scale(1); transform-origin: bottom left; }
-#char-santiago { transform: translateX(0) scale(1); transform-origin: bottom right; }
+#char-alissa {
+  transform: translateX(0) scale(1);
+  transform-origin: bottom left;
+}
+#char-santiago {
+  transform: translateX(0) scale(1);
+  transform-origin: bottom right;
+}
 
-/* Posições de Animação */
-.hide { opacity: 0 !important; transform: translateY(50px) !important; }
+.hide {
+  opacity: 0 !important;
+  transform: translateY(50px) !important;
+}
+.move-center-alissa {
+  transform: translateX(15vw) scale(1.05) !important;
+}
+.move-center-santiago {
+  transform: translateX(-15vw) scale(1.05) !important;
+}
+.kiss-alissa {
+  transform: translateX(30vw) scale(1.15) !important;
+}
+.kiss-santiago {
+  transform: translateX(-30vw) scale(1.15) !important;
+}
 
-/* Aproximação */
-.move-center-alissa { transform: translateX(15vw) scale(1.05) !important; }
-.move-center-santiago { transform: translateX(-15vw) scale(1.05) !important; }
-
-/* Beijo */
-.kiss-alissa { transform: translateX(30vw) scale(1.15) !important; }
-.kiss-santiago { transform: translateX(-30vw) scale(1.15) !important; }
-
-/* Susto/Surpresa */
-.shock { animation: shake 0.4s ease-in-out; }
+.shock {
+  animation: shake 0.4s ease-in-out;
+}
 @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    75% { transform: translateX(10px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
 }
 
-/* === INTERFACE DE DIÁLOGO E ESCOLHAS === */
 #ui-layer {
-    position: relative;
-    z-index: 4;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    padding-bottom: 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 #speaker-name {
-    font-size: 1.3rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    padding-left: 15px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,1);
-    transition: color 0.3s;
+  font-size: 1.3rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding-left: 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+  transition: color 0.3s;
 }
 
 #dialog-box {
-    background: rgba(15, 15, 25, 0.85);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-left: 4px solid #fff;
-    border-radius: 10px;
-    padding: 20px;
-    font-size: 1.15rem;
-    line-height: 1.6;
-    min-height: 130px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-    backdrop-filter: blur(8px);
+  background: rgba(15, 15, 25, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-left: 4px solid #fff;
+  border-radius: 10px;
+  padding: 20px;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  min-height: 130px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
 }
 
 #choices-container {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
 }
 
 .choice-btn {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 16px 20px;
-    border-radius: 8px;
-    font-size: 1.05rem;
-    text-align: left;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(5px);
-    opacity: 0;
-    animation: fadeIn 0.4s forwards ease-out;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 16px 20px;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  animation: fadeIn 0.4s forwards ease-out;
 }
 
-.choice-btn:hover, .choice-btn:active {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateX(10px);
-    border-color: #ff79c6;
+.choice-btn:hover,
+.choice-btn:active {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(10px);
+  border-color: #ff79c6;
 }
 
-@keyframes fadeIn { to { opacity: 1; } }
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
 
-/* Estilos para o modo multiplayer */
-.hidden-block { display: none !important; }
+.hidden-block {
+  display: none !important;
+}
+
 #waiting-msg {
-    font-size: 1.1rem;
-    color: #ff79c6;
-    text-align: center;
-    font-weight: bold;
-    padding: 12px;
-    background: rgba(15, 15, 25, 0.9);
-    border: 1px dashed #ff79c6;
-    border-radius: 8px;
-    margin-top: 10px;
+  font-size: 1.1rem;
+  color: #ff79c6;
+  text-align: center;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(15, 15, 25, 0.9);
+  border: 1px dashed #ff79c6;
+  border-radius: 8px;
+  margin-top: 10px;
 }
