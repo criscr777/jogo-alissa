@@ -1,215 +1,393 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap");
 
-* { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-    font-family: 'Nunito', sans-serif; 
-    user-select: none; 
-    -webkit-tap-highlight-color: transparent;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-body { 
-    background-color: #050510; 
-    overflow: hidden; 
-    color: #fff; 
-    width: 100vw; 
-    height: 100vh; 
-    height: 100dvh; 
+body {
+  background-color: #050510;
+  overflow: hidden;
+  color: #fff;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
 }
 
 /* TELA DE LOGIN */
 #login-screen {
-    position: fixed;
-    top: 0; left: 0; 
-    width: 100vw; height: 100vh;
-    height: 100dvh;
-    background: radial-gradient(circle, #1a1a2e 0%, #050510 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-    padding: 15px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background: radial-gradient(circle, #1a1a2e 0%, #050510 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  padding: 15px;
 }
 
 .login-card {
-    background: rgba(20, 20, 35, 0.95);
-    border: 2px solid #ff79c6;
-    border-radius: 20px;
-    padding: 25px 20px;
-    text-align: center;
-    max-width: 380px;
-    width: 100%;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+  background: rgba(20, 20, 35, 0.95);
+  border: 2px solid #ff79c6;
+  border-radius: 20px;
+  padding: 25px 20px;
+  text-align: center;
+  max-width: 380px;
+  width: 100%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
 }
 
-.login-card h1 { font-size: 1.5rem; color: #ff79c6; margin-bottom: 8px; }
-.login-card p { font-size: 0.95rem; color: #ccc; margin-bottom: 20px; }
-.login-buttons { display: flex; flex-direction: column; gap: 12px; }
+.login-card h1 {
+  font-size: 1.5rem;
+  color: #ff79c6;
+  margin-bottom: 8px;
+}
+.login-card p {
+  font-size: 0.95rem;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+.login-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
 .role-btn {
-    padding: 14px;
-    font-size: 1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    text-decoration: none;
-    display: block;
-    text-align: center;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  text-align: center;
 }
 
-.alissa-btn { background: linear-gradient(135deg, #ff79c6, #bd93f9); color: #fff; }
-.santiago-btn { background: linear-gradient(135deg, #8be9fd, #50fa7b); color: #111; }
+.alissa-btn {
+  background: linear-gradient(135deg, #ff79c6, #bd93f9);
+  color: #fff;
+}
+.santiago-btn {
+  background: linear-gradient(135deg, #8be9fd, #50fa7b);
+  color: #111;
+}
 
 /* JOGO PRINCIPAL */
 #game-container {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    overflow: hidden;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  background: #050510;
 }
 
+/* Fundo da praia visível e bem apresentado */
 #background {
-    position: absolute;
-    top: -5%; left: -5%;
-    width: 110%; height: 110%;
-    background-image: url('praia_noite.jpg');
-    background-size: cover;
-    background-position: center;
-    z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("praia_noite.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  z-index: 1;
 }
 
-/* Fundo claro para destacar o cenário da praia */
+/* Overlay suave para escurecer levemente a praia */
 #vfx-overlay {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 2; 
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.45) 85%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.25) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  transition: background 2s ease;
+  pointer-events: none;
 }
 
-.vfx-magic { background: radial-gradient(circle, rgba(0, 212, 255, 0.2) 0%, rgba(0,0,0,0.5) 100%) !important; }
-.vfx-romance { background: radial-gradient(circle, rgba(255, 105, 180, 0.25) 0%, rgba(0,0,0,0.55) 100%) !important; backdrop-filter: blur(1px); }
+/* Efeitos visuais sutis */
+.vfx-magic {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 212, 255, 0.15) 0%,
+    rgba(0, 150, 200, 0.1) 50%,
+    rgba(0, 0, 0, 0.5) 100%
+  ) !important;
+}
+.vfx-romance {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 105, 180, 0.18) 0%,
+    rgba(200, 50, 150, 0.12) 50%,
+    rgba(0, 0, 0, 0.55) 100%
+  ) !important;
+  backdrop-filter: blur(1px);
+}
 
-/* PERSONAGENS ENCAIXADOS NAS LATERAIS */
+/* PERSONAGENS - Responsive e Maiores */
 #characters-layer {
-    position: absolute;
-    bottom: 18vh;
-    left: 0;
-    width: 100%;
-    height: 62vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    z-index: 3;
-    padding: 0 5%;
-    pointer-events: none;
+  position: absolute;
+  bottom: min(15vh, 120px);
+  left: 0;
+  width: 100%;
+  height: clamp(50vh, 70vh, 75vh);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  z-index: 3;
+  padding: 0 3%;
+  pointer-events: none;
+  gap: 2%;
 }
 
 .sprite {
-    width: 42%;
-    height: 100%;
-    object-fit: contain;
-    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.8));
+  width: clamp(38%, 50%, 55%);
+  height: 100%;
+  object-fit: contain;
+  transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0px 8px 20px rgba(0, 0, 0, 0.9));
+  opacity: 1;
+}
+
+#char-alissa {
+  transform-origin: bottom left;
+}
+#char-santiago {
+  transform-origin: bottom right;
+}
+
+.hide {
+  opacity: 0 !important;
+  transform: translateY(30px) scale(0.85) !important;
+}
+
+/* Animações naturais e realistas */
+.appear-alissa {
+  animation: enterAlissa 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.appear-santiago {
+  animation: enterSantiago 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes enterAlissa {
+  from {
+    opacity: 0;
+    transform: translateX(-15vw) scale(0.9);
+  }
+  to {
     opacity: 1;
+    transform: translateX(0) scale(1);
+  }
 }
 
-#char-alissa { transform-origin: bottom left; }
-#char-santiago { transform-origin: bottom right; }
-
-.hide { 
-    opacity: 0 !important; 
-    transform: translateY(20px) scale(0.9) !important; 
+@keyframes enterSantiago {
+  from {
+    opacity: 0;
+    transform: translateX(15vw) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
 }
 
-/* Movimentos proporcionais e naturais */
-.step-forward-alissa { transform: translateX(6vw) scale(1.03); }
-.step-forward-santiago { transform: translateX(-6vw) scale(1.03); }
-.step-back-alissa { transform: translateX(-4vw) scale(0.97); }
-.step-back-santiago { transform: translateX(4vw) scale(0.97); }
-.kiss-alissa { transform: translateX(16vw) scale(1.1); }
-.kiss-santiago { transform: translateX(-16vw) scale(1.1); }
+/* Movimentos expressivos */
+.step-forward-alissa {
+  transform: translateX(8vw) scale(1.04);
+}
+.step-forward-santiago {
+  transform: translateX(-8vw) scale(1.04);
+}
+.step-back-alissa {
+  transform: translateX(-5vw) scale(0.96);
+}
+.step-back-santiago {
+  transform: translateX(5vw) scale(0.96);
+}
+.look-at-alissa {
+  transform: scaleX(-1.01) scaleY(1.01);
+}
+.look-at-santiago {
+  transform: scaleX(1.01) scaleY(1.01);
+}
+.shocked-alissa {
+  animation: shockAlissa 0.4s ease-in-out;
+}
+.shocked-santiago {
+  animation: shockSantiago 0.4s ease-in-out;
+}
+
+@keyframes shockAlissa {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-3vw) scaleY(1.02);
+  }
+  75% {
+    transform: translateX(3vw) scaleY(1.02);
+  }
+}
+
+@keyframes shockSantiago {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(3vw) scaleY(1.02);
+  }
+  75% {
+    transform: translateX(-3vw) scaleY(1.02);
+  }
+}
+
+.kiss-alissa {
+  transform: translateX(20vw) scale(1.08);
+}
+.kiss-santiago {
+  transform: translateX(-20vw) scale(1.08);
+}
+.kiss-close {
+  animation: kissClose 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes kissClose {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
 
 /* INTERFACE DE DIÁLOGO */
 #ui-layer {
-    position: relative;
-    z-index: 10;
-    width: 100%;
-    max-width: 650px;
-    margin: 0 auto;
-    padding: 10px 15px;
-    padding-bottom: max(18px, env(safe-area-inset-bottom));
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 12px 12px;
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
 }
 
 #speaker-name {
-    font-size: 1.1rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding-left: 8px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+  font-size: clamp(0.9rem, 2vw, 1.15rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding-left: 10px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.95);
+  transition: color 0.3s;
 }
 
 #dialog-box {
-    background: rgba(15, 15, 25, 0.92);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-left: 4px solid #ff79c6;
-    border-radius: 12px;
-    padding: 12px 16px;
-    font-size: 1rem;
-    line-height: 1.5;
-    min-height: 90px;
-    max-height: 130px;
-    overflow-y: auto;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(8px);
+  background: rgba(10, 10, 20, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-left: 4px solid #ff79c6;
+  border-radius: 12px;
+  padding: 13px 16px;
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  line-height: 1.6;
+  min-height: 85px;
+  max-height: 140px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  color: #e8e8e8;
 }
 
 #choices-container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
 }
 
 .choice-btn {
-    background: rgba(255, 255, 255, 0.15);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    padding: 13px 15px;
-    border-radius: 10px;
-    font-size: 0.95rem;
-    text-align: left;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    backdrop-filter: blur(5px);
-    opacity: 0;
-    animation: fadeIn 0.3s forwards ease-out;
+  background: rgba(255, 255, 255, 0.12);
+  color: #e8e8e8;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: clamp(12px, 2.5vh, 15px) 14px;
+  border-radius: 10px;
+  font-size: clamp(0.9rem, 1.8vw, 0.98rem);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  animation: fadeIn 0.4s forwards ease-out;
+  line-height: 1.4;
+}
+
+.choice-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(6px);
+  border-color: #ff79c6;
 }
 
 .choice-btn:active {
-    background: rgba(255, 255, 255, 0.35);
-    transform: scale(0.98);
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(0.97);
 }
 
-@keyframes fadeIn { to { opacity: 1; } }
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
 
-.hidden-block { display: none !important; }
+.hidden-block {
+  display: none !important;
+}
 
 #waiting-msg {
-    font-size: 0.95rem;
-    color: #ff79c6;
-    text-align: center;
-    font-weight: bold;
-    padding: 12px;
-    background: rgba(15, 15, 25, 0.95);
-    border: 1px dashed #ff79c6;
-    border-radius: 10px;
+  font-size: clamp(0.85rem, 1.8vw, 1rem);
+  color: #ff79c6;
+  text-align: center;
+  font-weight: 600;
+  padding: 12px;
+  background: rgba(10, 10, 20, 0.95);
+  border: 2px dashed #ff79c6;
+  border-radius: 10px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
 }
