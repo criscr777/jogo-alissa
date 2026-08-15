@@ -1,0 +1,64 @@
+#characters-layer { position: absolute; }
+
+.inactive-character { opacity: .58 !important; filter: grayscale(.2) brightness(.72) drop-shadow(0 8px 20px rgba(0,0,0,.8)) !important; transform: scale(.96); }
+
+.character-bubble, .choice-bubble {
+  position: absolute;
+  z-index: 20;
+  max-width: min(34vw, 430px);
+  padding: 14px 18px;
+  border-radius: 20px;
+  background: rgba(12, 14, 28, .94);
+  border: 2px solid rgba(255,255,255,.8);
+  color: #fff;
+  font-size: clamp(.9rem, 1.4vw, 1.15rem);
+  line-height: 1.35;
+  box-shadow: 0 10px 30px rgba(0,0,0,.5);
+  animation: bubbleIn .22s ease-out;
+  pointer-events: none;
+}
+
+.character-bubble::after, .choice-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  width: 18px;
+  height: 18px;
+  background: rgba(12, 14, 28, .94);
+  border-right: 2px solid rgba(255,255,255,.8);
+  border-bottom: 2px solid rgba(255,255,255,.8);
+  transform: rotate(45deg);
+}
+
+.character-bubble[data-speaker="alissa"], .choice-bubble[data-role="alissa"] { left: 10%; top: 18%; border-color: #ff9ed6; }
+.character-bubble[data-speaker="alissa"]::after, .choice-bubble[data-role="alissa"]::after { left: 28%; }
+.character-bubble[data-speaker="santiago"], .choice-bubble[data-role="santiago"] { right: 10%; top: 18%; border-color: #8be9fd; }
+.character-bubble[data-speaker="santiago"]::after, .choice-bubble[data-role="santiago"]::after { right: 28%; }
+
+.choice-bubble { top: 31%; transform: scale(.94); background: rgba(20, 20, 38, .97); }
+
+.story-choice {
+  width: min(92vw, 760px);
+  margin: 7px auto;
+  padding: 13px 18px;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 15px;
+  background: rgba(12,14,28,.9);
+  color: #fff;
+  font-size: clamp(.9rem, 1.5vw, 1.08rem);
+  cursor: pointer;
+  text-align: left;
+  transition: transform .15s ease, background .15s ease, border-color .15s ease;
+}
+.story-choice:hover { transform: translateY(-2px); background: rgba(40,43,70,.96); border-color: #fff; }
+.story-choice:disabled { opacity: .5; cursor: wait; }
+
+@keyframes bubbleIn { from { opacity: 0; transform: translateY(8px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+@media (max-width: 700px) {
+  .character-bubble, .choice-bubble { max-width: 62vw; padding: 10px 13px; font-size: .82rem; }
+  .character-bubble[data-speaker="alissa"], .choice-bubble[data-role="alissa"] { left: 4%; top: 12%; }
+  .character-bubble[data-speaker="santiago"], .choice-bubble[data-role="santiago"] { right: 4%; top: 12%; }
+  .choice-bubble { top: 25% !important; }
+  .story-choice { padding: 11px 13px; }
+}
