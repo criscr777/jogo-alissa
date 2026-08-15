@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Um Encontro Místico - Alissa & Santiago</title>
+    <!-- Arquivo de estilo -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Biblioteca do Socket.io para comunicação em tempo real -->
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+
+    <div id="game-container">
+        <!-- Fundo e Efeitos -->
+        <div id="background"></div>
+        <div id="vfx-overlay"></div>
+
+        <!-- Personagens -->
+        <div id="characters-layer">
+            <img id="char-alissa" class="sprite hide" src="alissa.png" alt="Alissa">
+            <img id="char-santiago" class="sprite hide" src="santiago.png" alt="Santiago">
+        </div>
+
+        <!-- Interface -->
+        <div id="ui-layer">
+            <div id="speaker-name"></div>
+            <div id="dialog-box">
+                <div id="dialog-text"></div>
+            </div>
+            <!-- Mensagem de espera quando for a vez do outro jogador -->
+            <div id="waiting-msg" class="hidden-block">Aguardando a decisão do outro jogador...</div>
+            <div id="choices-container"></div>
+        </div>
+    </div>
+
+    <!-- Lógica e história conectados ao Socket.io -->
+    <script src="script.js"></script>
+</body>
+</html>
+
