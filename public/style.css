@@ -99,7 +99,7 @@ body {
     position: absolute;
     top: -5%; left: -5%;
     width: 110%; height: 110%;
-    background-image: url('praia_noite.jpg'); /* Altere para .png se sua imagem for png */
+    background-image: url('praia_noite.jpg');
     background-size: cover;
     background-position: center;
     z-index: 1;
@@ -108,39 +108,40 @@ body {
 
 @keyframes breathe {
     0% { transform: scale(1) translate(0px, 0px); }
-    100% { transform: scale(1.05) translate(-10px, 5px); }
+    100% { transform: scale(1.06) translate(-10px, 5px); }
 }
 
+/* Fundo mais claro para a praia aparecer bem */
 #vfx-overlay {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     z-index: 2; 
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.85) 75%);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.55) 80%);
 }
 
-.vfx-magic { background: radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, rgba(0,0,0,0.85) 100%) !important; }
-.vfx-romance { background: radial-gradient(circle, rgba(255, 105, 180, 0.3) 0%, rgba(0,0,0,0.9) 100%) !important; backdrop-filter: blur(2px); }
+.vfx-magic { background: radial-gradient(circle, rgba(0, 212, 255, 0.25) 0%, rgba(0,0,0,0.6) 100%) !important; }
+.vfx-romance { background: radial-gradient(circle, rgba(255, 105, 180, 0.3) 0%, rgba(0,0,0,0.65) 100%) !important; backdrop-filter: blur(1px); }
 
-/* === PERSONAGENS (CORRIGIDO PARA APARECER NO CELULAR) === */
+/* === PERSONAGENS MAIORES E MAIS DINÂMICOS === */
 #characters-layer {
     position: absolute;
-    bottom: 24vh;
+    bottom: 20vh;
     left: 0;
     width: 100%;
-    height: 50vh;
+    height: 58vh;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     z-index: 3;
-    padding: 0 4%;
+    padding: 0 2%;
     pointer-events: none;
 }
 
 .sprite {
-    width: 42%; /* Garante largura proporcional no mobile */
+    width: 50%; /* Personagens maiores na tela */
     height: 100%;
     object-fit: contain;
-    transition: all 0.6s ease-in-out;
-    filter: drop-shadow(0px 8px 12px rgba(0, 0, 0, 0.7));
+    transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+    filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.8));
     opacity: 1;
 }
 
@@ -149,20 +150,22 @@ body {
 
 .hide { 
     opacity: 0 !important; 
-    transform: translateY(20px) scale(0.95) !important; 
+    transform: translateY(30px) scale(0.9) !important; 
 }
 
-/* Animações de Movimento */
-.move-center-alissa { transform: translateX(8vw) scale(1.03); }
-.move-center-santiago { transform: translateX(-8vw) scale(1.03); }
-.kiss-alissa { transform: translateX(18vw) scale(1.08); }
-.kiss-santiago { transform: translateX(-18vw) scale(1.08); }
+/* Animações de movimento bem mais visíveis */
+.move-center-alissa { transform: translateX(12vw) scale(1.06); }
+.move-center-santiago { transform: translateX(-12vw) scale(1.06); }
+
+/* Cena do beijo: eles se aproximam bastante no centro da tela */
+.kiss-alissa { transform: translateX(25vw) scale(1.15); }
+.kiss-santiago { transform: translateX(-25vw) scale(1.15); }
 
 .shock { animation: shake 0.4s ease-in-out; }
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-6px); }
-    75% { transform: translateX(6px); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
 }
 
 /* === INTERFACE DE DIÁLOGO E BOTÕES === */
@@ -170,17 +173,17 @@ body {
     position: relative;
     z-index: 10;
     width: 100%;
-    max-width: 600px;
+    max-width: 650px;
     margin: 0 auto;
     padding: 10px 15px;
-    padding-bottom: max(15px, env(safe-area-inset-bottom));
+    padding-bottom: max(18px, env(safe-area-inset-bottom));
     display: flex;
     flex-direction: column;
     gap: 6px;
 }
 
 #speaker-name {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -189,38 +192,38 @@ body {
 }
 
 #dialog-box {
-    background: rgba(15, 15, 25, 0.94);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-left: 4px solid #fff;
-    border-radius: 10px;
-    padding: 12px 14px;
-    font-size: 0.95rem;
-    line-height: 1.45;
-    min-height: 85px;
-    max-height: 125px;
+    background: rgba(15, 15, 25, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-left: 4px solid #ff79c6;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 1rem;
+    line-height: 1.5;
+    min-height: 90px;
+    max-height: 130px;
     overflow-y: auto;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(6px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
 }
 
 #choices-container {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
     margin-top: 4px;
 }
 
 .choice-btn {
     background: rgba(255, 255, 255, 0.15);
     color: white;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    padding: 12px 14px;
-    border-radius: 8px;
-    font-size: 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 13px 15px;
+    border-radius: 10px;
+    font-size: 0.95rem;
     text-align: left;
     cursor: pointer;
     transition: all 0.2s ease;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(5px);
     opacity: 0;
     animation: fadeIn 0.3s forwards ease-out;
 }
@@ -239,12 +242,12 @@ body {
 }
 
 #waiting-msg {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #ff79c6;
     text-align: center;
     font-weight: bold;
-    padding: 10px;
+    padding: 12px;
     background: rgba(15, 15, 25, 0.95);
     border: 1px dashed #ff79c6;
-    border-radius: 8px;
+    border-radius: 10px;
 }
