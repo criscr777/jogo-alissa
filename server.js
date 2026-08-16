@@ -129,4 +129,4 @@ io.on("connection", (socket) => {
 function finishGame() { if (game.phase === "finished") return; game.phase="finished"; broadcast(); io.emit("game-finished"); }
 app.get("/", (req,res)=>res.sendFile(path.join(__dirname,"public","index.html")));
 app.get("/health", (req,res)=>res.status(200).json({status:"ok",phase:game.phase,scene:game.scene,turn:game.turn,revision:game.revision,players:game.players}));
-server.listen(PORT,()=>console.log(`A MARÉ DE VIDRO — servidor na porta ${PORT}`));
+server.listen(PORT,()=>console.log(`Santiago & Alissa — servidor na porta ${PORT}`));
