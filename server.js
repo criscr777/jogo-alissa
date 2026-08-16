@@ -20,8 +20,8 @@ const game = {
   players: { santiago: null, alissa: null },
 };
 
-// O servidor valida a sequência da história. O navegador nunca pode decidir sozinho
-// qual será a próxima cena ou de quem é a vez.
+// O servidor é a autoridade da partida. O navegador nunca escolhe sozinho
+// personagem, turno, próxima cena ou resultado.
 const transitions = {
   inicio: ["carta1", "carta1"], carta1: ["marca", "marca"], marca: ["rio", "rio"],
   rio: ["diario", "diario"], diario: ["mirante", "mirante"], mirante: ["revelacao", "revelacao"],
@@ -30,32 +30,62 @@ const transitions = {
 const turns = { inicio:"santiago", carta1:"alissa", marca:"santiago", rio:"alissa", diario:"santiago", mirante:"alissa", revelacao:"santiago", sentimento:"alissa", final:"santiago", fim:"alissa" };
 
 function state() {
-  return { phase: game.phase, scene: game.scene, turn: game.turn, revision: game.revision, lastChoice: game.lastChoice, stats: { ...game.stats }, players: { santiago: Boolean(game.players.santiago), alissa: Boolean(game.players.alissa) } };
+  return {
+    phase: game.phase,
+    scene: game.scene,
+    turn: game.turn,
+    revision: game.revision,
+    lastChoice: game.lastChoice,
+    stats: { ...game.stats },
+    players: { santiago: Boolean(game.players.santiago), alissa: Boolean(game.players.alissa) },
+  };
 }
 function broadcast() { io.emit("game-state", state()); }
 function broadcastPlayers() { io.emit("players-update", { santiago: Boolean(game.players.santiago), alissa: Boolean(game.players.alissa) }); }
-function resetGame() { game.phase="lobby"; game.scene="inicio"; game.turn="santiago"; game.revision=0; game.lastChoice=null; game.stats=initialStats(); }
+function resetGame() {
+  game.phase="lobby"; game.scene="inicio"; game.turn="santiago"; game.revision=0;
+  game.lastChoice=null; game.stats=initialStats();
+}
 
 io.on("connection", (socket) => {
   socket.emit("game-state", state());
 
   socket.on("join-game", (data = {}) => {
     const requested = String(data.role || "").toLowerCase();
-    let role = requested === "santiago" || requested === "alissa" ? requested : null;
-    if (role && game.players[role]) role = null;
-    if (!role && !game.players.santiago) role = "santiago";
-    else if (!role && !game.players.alissa) role = "alissa";
-    if (!role) return socket.emit("game-error", "A sala já está com os dois jogadores conectados.");
-    game.players[role] = socket.id;
-    socket.data.role = role;
-    socket.emit("role-assigned", { role });
+
+    // A página de personagem sempre precisa declarar explicitamente quem está entrando.
+    if (requested !== "santiago" && requested !== "alissa") {
+      return socket.emit("game-error", "Escolha Santiago ou Alissa antes de entrar na sala.");
+    }
+
+    // Reconexão da mesma pessoa: mantém o personagem já reservado para aquele socket.
+    if (socket.data.role === requested && game.players[requested] === socket.id) {
+      socket.emit("role-assigned", { role: requested });
+      socket.emit("game-state", state());
+      return;
+    }
+
+    // Nunca troca automaticamente de personagem. Se Santiago já estiver ocupado,
+    // outra pessoa precisa escolher Alissa.
+    if (game.players[requested] && game.players[requested] !== socket.id) {
+      return socket.emit("game-error", `${requested === "santiago" ? "Santiago" : "Alissa"} já está sendo controlado por outro jogador. Escolha o outro personagem.`);
+    }
+
+    // Um socket não pode controlar os dois personagens.
+    if (socket.data.role && socket.data.role !== requested) {
+      return socket.emit("game-error", "Este dispositivo já entrou como outro personagem.");
+    }
+
+    game.players[requested] = socket.id;
+    socket.data.role = requested;
+    socket.emit("role-assigned", { role: requested });
     broadcastPlayers();
     socket.emit("game-state", state());
   });
 
   socket.on("start-game", () => {
-    if (!socket.data.role) return socket.emit("game-error", "Entre na sala antes de iniciar.");
-    if (!game.players.santiago || !game.players.alissa) return socket.emit("game-error", "A história só pode começar quando os dois estiverem online.");
+    if (!socket.data.role) return socket.emit("game-error", "Escolha seu personagem antes de iniciar.");
+    if (!game.players.santiago || !game.players.alissa) return socket.emit("game-error", "A história só pode começar quando Santiago e Alissa estiverem online.");
     if (game.phase !== "lobby") return;
     game.phase="playing"; game.scene="inicio"; game.turn="santiago"; game.revision=1; game.lastChoice=null;
     broadcast();
@@ -64,7 +94,7 @@ io.on("connection", (socket) => {
   socket.on("make-choice", (data = {}) => {
     const role = socket.data.role;
     if (!role || game.phase !== "playing") return;
-    if (role !== game.turn) return socket.emit("game-sync-error", { message:"Essa escolha já não pertence a você.", state:state() });
+    if (role !== game.turn) return socket.emit("game-sync-error", { message:"Essa escolha não pertence ao seu personagem agora.", state:state() });
     if (Number(data.revision) !== game.revision || data.scene !== game.scene) return socket.emit("game-sync-error", { message:"A cena mudou antes da escolha chegar.", state:state() });
 
     const index = Number(data.choiceIndex);
@@ -74,7 +104,9 @@ io.on("connection", (socket) => {
     const nextScene = allowed[index];
     const nextTurn = turns[nextScene];
     const effects = data.effects && typeof data.effects === "object" ? data.effects : {};
-    for (const [key,value] of Object.entries(effects)) if (Object.prototype.hasOwnProperty.call(game.stats,key) && Number.isFinite(Number(value))) game.stats[key] += Number(value);
+    for (const [key,value] of Object.entries(effects)) {
+      if (Object.prototype.hasOwnProperty.call(game.stats,key) && Number.isFinite(Number(value))) game.stats[key] += Number(value);
+    }
 
     game.lastChoice = { role, choiceIndex:index, text:typeof data.choiceText === "string" ? data.choiceText : "" };
     game.scene = nextScene;
