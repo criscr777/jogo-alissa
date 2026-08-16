@@ -14,7 +14,6 @@
     .hero h1{font-size:clamp(2rem,6vw,4rem);margin:.2em 0;color:#ffd7ee;text-shadow:0 4px 25px #0008}
     .hero p{color:#d8c9da;font:500 15px/1.6 Arial,sans-serif}
 
-    /* CARTA INTERATIVA */
     .card-stage{height:clamp(430px,65vh,620px);display:flex;align-items:center;justify-content:center;perspective:1400px;margin:10px auto 35px;position:relative}
     .envelope-wrap{width:min(620px,88vw);height:min(410px,58vw);min-height:280px;position:relative;cursor:pointer;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 28px 35px #0009)}
     .envelope-wrap:hover{transform:translateY(-5px) rotateX(2deg)}
@@ -43,7 +42,6 @@
     .video-box{background:#11101b;border:1px solid #ffffff22;border-radius:18px;padding:16px;margin:0 auto 25px;max-width:900px;box-shadow:0 15px 45px #0005}
     .video-box video{width:100%;display:block;border-radius:12px;max-height:600px;background:#050509}
 
-    /* GALERIA — inspirada no grid responsivo enviado */
     .photos{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));grid-auto-rows:190px;grid-auto-flow:dense}
     .photos>div{display:flex;justify-content:center;align-items:center;overflow:hidden;border-radius:6px;min-width:0}
     .photos img{width:100%;height:100%;object-fit:cover;display:block;border-radius:6px;transition:transform .45s ease,filter .45s ease}
@@ -116,18 +114,18 @@ feliz um mês de nós e da minha felicidade diária. eu te amo pra crl.</div>
     <section class="media">
       <div class="video-box">
         <video controls playsinline preload="metadata">
-          <source src="public/video.MP4" type="video/mp4">
+          <source src="/video.MP4" type="video/mp4">
           seu navegador não conseguiu carregar o vídeo.
         </video>
       </div>
 
       <div class="photos">
-        <div class="wide"><img src="public/foto1.jpeg" alt="Foto nossa 1"></div>
-        <div><img src="public/foto2.jpeg" alt="Foto nossa 2"></div>
-        <div class="tall"><img src="public/foto3.jpeg" alt="Foto nossa 3"></div>
-        <div class="big"><img src="public/foto4.jpeg" alt="Foto nossa 4"></div>
-        <div><img src="public/foto5.jpeg" alt="Foto nossa 5"></div>
-        <div class="wide"><img src="public/foto6.jpeg" alt="Foto nossa 6"></div>
+        <div class="wide"><img src="/foto1.jpeg" alt="Foto nossa 1"></div>
+        <div><img src="/foto2.jpeg" alt="Foto nossa 2"></div>
+        <div class="tall"><img src="/foto3.jpeg" alt="Foto nossa 3"></div>
+        <div class="big"><img src="/foto4.jpeg" alt="Foto nossa 4"></div>
+        <div><img src="/foto5.jpeg" alt="Foto nossa 5"></div>
+        <div class="wide"><img src="/foto6.jpeg" alt="Foto nossa 6"></div>
       </div>
     </section>
 
@@ -156,7 +154,6 @@ feliz um mês de nós e da minha felicidade diária. eu te amo pra crl.</div>
       }
     });
 
-    /* Movimento 3D suave inspirado no cartão original */
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     if (!motionQuery.matches) {
