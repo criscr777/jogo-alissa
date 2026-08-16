@@ -1,82 +1,13 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>para alissa 🤍</title>
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{min-height:100vh;font-family:Georgia,serif;background:linear-gradient(45deg,#190f2c,#200b30);color:#fff;padding:24px 15px 50px;overflow-x:hidden}
-    .content{width:min(1050px,100%);margin:auto;position:relative}
-    #background{position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 50% 20%,#5b315e,#190f2c 55%,#090713);opacity:.9}
-    .hero{text-align:center;padding:22px 10px 12px}
-    .hero h1{font-size:clamp(2rem,6vw,4rem);margin:.2em 0;color:#ffd7ee;text-shadow:0 4px 25px #0008}
-
-    .card-stage{height:clamp(430px,65vh,620px);display:flex;align-items:center;justify-content:center;perspective:1400px;margin:10px auto 35px;position:relative}
-    .envelope-wrap{width:min(620px,88vw);height:min(410px,58vw);min-height:280px;position:relative;cursor:pointer;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 28px 35px #0009)}
-    .envelope-wrap:hover{transform:translateY(-5px) rotateX(2deg)}
-    .envelope{position:absolute;inset:0;background:linear-gradient(135deg,#f2d7c5,#f8e8d8 48%,#d8ad9d);border-radius:10px;overflow:visible;transform-style:preserve-3d}
-    .envelope-body{position:absolute;inset:0;border-radius:10px;background:linear-gradient(135deg,#ead0bf,#f6e5d5);overflow:hidden}
-    .envelope-body:before,.envelope-body:after{content:"";position:absolute;bottom:0;width:72%;height:2px;background:#b4877b;opacity:.5}
-    .envelope-body:before{left:-8%;transform:rotate(29deg);transform-origin:left bottom}.envelope-body:after{right:-8%;transform:rotate(-29deg);transform-origin:right bottom}
-    .flap{position:absolute;left:0;top:0;width:100%;height:58%;background:linear-gradient(135deg,#f8e5d6,#dfb6a8);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top center;z-index:5;transition:transform 1s cubic-bezier(.2,.8,.2,1),z-index 0s linear 0s;border-radius:9px 9px 0 0;backface-visibility:hidden}
-    .seal{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:#9c476f;color:#ffe7f2;font-size:30px;box-shadow:0 6px 15px #5c233d99;z-index:7;transition:transform .7s ease,opacity .5s ease}
-    .click-label{position:absolute;left:50%;bottom:10%;transform:translateX(-50%);font:700 14px Arial,sans-serif;letter-spacing:2px;color:#744354;z-index:6;white-space:nowrap}
-    .paper{position:absolute;left:5%;right:5%;top:4%;height:92%;background:#fffaf2;color:#332735;border-radius:5px;padding:clamp(22px,4vw,45px);box-shadow:0 12px 25px #0004;z-index:2;transform:translateY(32%);opacity:0;transition:transform 1.15s cubic-bezier(.2,.8,.2,1),opacity .65s ease;overflow:auto;scrollbar-width:thin}
-    .paper h2{text-align:center;color:#9c476f;font-size:clamp(1.4rem,4vw,2.2rem);margin-bottom:22px}.paper-text{white-space:pre-line;font-size:clamp(.98rem,1.7vw,1.1rem);line-height:1.85}.paper:after{content:"♥";display:block;text-align:center;color:#d66b9e;font-size:24px;margin-top:25px}
-    .open-label{position:absolute;left:50%;bottom:-38px;transform:translateX(-50%);font:600 13px Arial,sans-serif;color:#d8c9da;white-space:nowrap;transition:opacity .4s}
-    .envelope-wrap.active .flap{transform:rotateX(180deg);z-index:1}.envelope-wrap.active .seal{opacity:0;transform:translate(-50%,-50%) scale(.4)}.envelope-wrap.active .paper{transform:translateY(-7%);opacity:1;z-index:6}.envelope-wrap.active .click-label,.envelope-wrap.active .open-label{opacity:0;pointer-events:none}.envelope-wrap.active{cursor:default;transform:none}
-
-    .media{margin-top:28px;padding-top:20px}.media h2{text-align:center;color:#ffd7ee;font-size:clamp(1.5rem,4vw,2.2rem);margin-bottom:8px}.media-intro{text-align:center;color:#cdbed0;font:14px/1.6 Arial,sans-serif;margin-bottom:18px}
-    .video-box{background:#11101b;border:1px solid #ffffff22;border-radius:18px;padding:16px;margin:0 auto 30px;max-width:900px;box-shadow:0 15px 45px #0005}.video-box video{width:100%;display:block;border-radius:12px;max-height:600px;background:#050509}
-
-    /* galeria inspirada nos cards expansivos do arquivo enviado */
-    .gallery{display:flex;align-items:stretch;gap:10px;width:100%;height:clamp(330px,52vw,480px);overflow:hidden}
-    .gallery-card{position:relative;flex:1 1 0;min-width:0;overflow:hidden;border-radius:22px;cursor:pointer;background:#16131e;box-shadow:0 12px 35px #0006;transition:flex-grow .65s cubic-bezier(.05,.61,.41,.95),transform .35s ease,border-radius .5s ease;isolation:isolate}
-    .gallery-card:hover{transform:translateY(-4px)}
-    .gallery-card.active{flex-grow:7;border-radius:18px;cursor:zoom-in}
-    .gallery-card img{width:100%;height:100%;display:block;object-fit:cover;object-position:center;transition:transform .8s cubic-bezier(.05,.61,.41,.95),filter .5s ease,opacity .5s ease}
-    .gallery-card:not(.active) img{filter:brightness(.72);transform:scale(1.03)}
-    .gallery-card.active img{transform:scale(1);filter:brightness(1)}
-    .gallery-card .shade{position:absolute;inset:auto 0 0;height:45%;background:linear-gradient(transparent,#000b);z-index:2;pointer-events:none;opacity:.9;transition:opacity .5s}
-    .gallery-card:not(.active) .shade{opacity:.45}
-    .gallery-card .number{position:absolute;left:14px;bottom:13px;z-index:3;color:#fff;font:700 12px Arial,sans-serif;letter-spacing:2px;text-shadow:0 2px 8px #000;opacity:.9}
-    .gallery-card .expand-hint{position:absolute;right:14px;bottom:12px;z-index:3;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#ffffff22;border:1px solid #fff5;color:#fff;font:18px Arial,sans-serif;opacity:0;transform:translateY(8px);transition:.4s}
-    .gallery-card.active .expand-hint{opacity:1;transform:none}
-    .gallery-card.active:hover img{transform:scale(1.015)}
-
-    /* ao clicar na imagem aberta, ela é exibida inteira sem crop */
-    .photo-viewer{position:fixed;inset:0;z-index:1000;background:#08060ee8;backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:30px;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s ease}
-    .photo-viewer.open{opacity:1;visibility:visible}
-    .photo-viewer img{max-width:min(94vw,1200px);max-height:88vh;width:auto;height:auto;object-fit:contain;border-radius:12px;box-shadow:0 25px 80px #000b;transform:scale(.94);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
-    .photo-viewer.open img{transform:scale(1)}
-    .viewer-close{position:absolute;right:22px;top:18px;width:44px;height:44px;border:1px solid #ffffff55;border-radius:50%;background:#111a;color:#fff;font-size:27px;cursor:pointer;display:grid;place-items:center;z-index:2}
-    .viewer-prev,.viewer-next{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border:1px solid #ffffff44;border-radius:50%;background:#111a;color:#fff;font-size:25px;cursor:pointer;z-index:2}
-    .viewer-prev{left:20px}.viewer-next{right:20px}
-    .viewer-count{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:#fff;font:600 12px Arial,sans-serif;letter-spacing:2px}
-
-    .back{display:block;width:max-content;margin:35px auto 0;color:#ffd7ee;text-decoration:none;font:600 14px Arial,sans-serif}.back:hover{text-decoration:underline}
-    @media(max-width:700px){
-      body{padding:14px 10px 35px}.card-stage{height:clamp(470px,72vh,600px);margin-bottom:20px}.envelope-wrap{width:92vw;height:min(390px,68vw);min-height:260px}.paper{left:2%;right:2%;top:2%;height:96%;padding:24px 20px}.paper-text{line-height:1.7}
-      .gallery{height:430px;gap:7px}.gallery-card{border-radius:15px}.gallery-card:not(.active){flex-grow:.65}.gallery-card.active{flex-grow:6}.gallery-card .expand-hint{display:none}.photo-viewer{padding:18px}.viewer-prev{left:8px}.viewer-next{right:8px}
-    }
-    @media(max-width:430px){.card-stage{height:500px}.envelope-wrap{width:94vw;height:300px}.seal{width:58px;height:58px;font-size:24px}.gallery{height:390px;gap:5px}.gallery-card{border-radius:12px}.gallery-card .number{left:9px;bottom:9px}.photo-viewer img{max-width:96vw;max-height:82vh}}
-    @media(prefers-reduced-motion:reduce){.gallery-card,.gallery-card img,.photo-viewer,.photo-viewer img{transition:none}}
-  </style>
-</head>
-<body>
-  <div class="content">
-    <div id="background"></div>
-    <header class="hero"><h1>feliz um mês, princesa.</h1></header>
-
-    <section class="card-stage" aria-label="Carta de amor">
-      <div class="envelope-wrap" id="love-card" role="button" tabindex="0" aria-label="Abrir carta">
-        <div class="envelope">
-          <div class="envelope-body"></div><div class="flap"></div><div class="seal">♥</div><div class="click-label">CLIQUE PARA ABRIR</div>
-          <article class="paper">
-            <h2>para você, alissa.</h2>
-            <div class="paper-text">desde que nos conhecemos, nunca imaginei que um dia estaríamos aqui. nunca imaginei que você se tornaria o que se tornou na minha vida, mas agradeço todos os dias por nossos caminhos terem se reencontrado e por eu ter tido a chance de te conhecer melhor e poder me apaixonar completamente por você. você foi o inesperado mais esperado, o meu melhor presente.
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>para alissa 🤍</title>
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;font-family:Georgia,serif;background:radial-gradient(circle at 50% 15%,#5b315e,#190f2c 55%,#090713);color:#fff;padding:24px 15px 50px;overflow-x:hidden}.content{width:min(1050px,100%);margin:auto}.hero{text-align:center;padding:15px 10px}.hero h1{font-size:clamp(2rem,6vw,4rem);margin:.2em 0;color:#ffd7ee;text-shadow:0 4px 25px #0008}.card-stage{height:clamp(430px,65vh,620px);display:flex;align-items:center;justify-content:center;perspective:1400px;margin:10px auto 35px}.envelope-wrap{width:min(620px,88vw);height:min(410px,58vw);min-height:280px;position:relative;cursor:pointer;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 28px 35px #0009)}.envelope-wrap:hover{transform:translateY(-5px) rotateX(2deg)}.envelope{position:absolute;inset:0;background:linear-gradient(135deg,#f2d7c5,#f8e8d8 48%,#d8ad9d);border-radius:10px;overflow:visible;transform-style:preserve-3d}.envelope-body{position:absolute;inset:0;border-radius:10px;background:linear-gradient(135deg,#ead0bf,#f6e5d5);overflow:hidden}.envelope-body:before,.envelope-body:after{content:"";position:absolute;bottom:0;width:72%;height:2px;background:#b4877b;opacity:.5}.envelope-body:before{left:-8%;transform:rotate(29deg);transform-origin:left bottom}.envelope-body:after{right:-8%;transform:rotate(-29deg);transform-origin:right bottom}.flap{position:absolute;left:0;top:0;width:100%;height:58%;background:linear-gradient(135deg,#f8e5d6,#dfb6a8);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top center;z-index:5;transition:transform 1s cubic-bezier(.2,.8,.2,1);border-radius:9px 9px 0 0;backface-visibility:hidden}.seal{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:#9c476f;color:#ffe7f2;font-size:30px;box-shadow:0 6px 15px #5c233d99;z-index:7;transition:.7s}.click-label{position:absolute;left:50%;bottom:10%;transform:translateX(-50%);font:700 14px Arial,sans-serif;letter-spacing:2px;color:#744354;z-index:6;white-space:nowrap}.paper{position:absolute;left:5%;right:5%;top:4%;height:92%;background:#fffaf2;color:#332735;border-radius:5px;padding:clamp(22px,4vw,45px);box-shadow:0 12px 25px #0004;z-index:2;transform:translateY(32%);opacity:0;transition:transform 1.15s cubic-bezier(.2,.8,.2,1),opacity .65s ease;overflow:auto}.paper h2{text-align:center;color:#9c476f;font-size:clamp(1.4rem,4vw,2.2rem);margin-bottom:22px}.paper-text{white-space:pre-line;font-size:clamp(.98rem,1.7vw,1.1rem);line-height:1.85}.paper:after{content:"♥";display:block;text-align:center;color:#d66b9e;font-size:24px;margin-top:25px}.open-label{position:absolute;left:50%;bottom:-38px;transform:translateX(-50%);font:600 13px Arial,sans-serif;color:#d8c9da;white-space:nowrap}.envelope-wrap.active .flap{transform:rotateX(180deg);z-index:1}.envelope-wrap.active .seal{opacity:0;transform:translate(-50%,-50%) scale(.4)}.envelope-wrap.active .paper{transform:translateY(-7%);opacity:1;z-index:6}.envelope-wrap.active .click-label,.envelope-wrap.active .open-label{opacity:0;pointer-events:none}.envelope-wrap.active{cursor:default;transform:none}.media{margin-top:28px;padding-top:20px}.video-box{background:#11101b;border:1px solid #ffffff22;border-radius:18px;padding:16px;margin:0 auto 55px;max-width:900px;box-shadow:0 15px 45px #0005}.video-box video{width:100%;display:block;border-radius:12px;max-height:600px;background:#050509}
+.gallery-title{text-align:center;color:#ffd7ee;font-size:clamp(1.5rem,4vw,2.2rem);margin:0 0 8px}.gallery-subtitle{text-align:center;color:#cdbed0;font:14px/1.6 Arial,sans-serif;margin:0 0 10px}.gallery-wrap{min-height:500px;display:grid;place-items:center;overflow:hidden;position:relative;margin:10px auto 20px;perspective:900px}.gallery-wrap:after{content:"clique em uma foto para ampliar • passe o mouse para pausar";position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font:12px Arial,sans-serif;color:#d8c9da;opacity:.65;white-space:nowrap}.gallery{--s:clamp(130px,18vw,190px);width:var(--s);height:var(--s);display:grid;transform-style:preserve-3d;animation:spinGallery 18s linear infinite;position:relative}.gallery:hover{animation-play-state:paused}.gallery img{grid-area:1/1;width:var(--s);height:var(--s);object-fit:cover;border-radius:12px;box-shadow:0 10px 25px #0008;border:2px solid #ffffff44;backface-visibility:hidden;transform:rotate(var(--a)) translateY(120%) rotateX(90deg);cursor:pointer;transition:filter .3s,box-shadow .3s}.gallery img:hover{filter:brightness(1.15);box-shadow:0 15px 35px #000b}.gallery img:nth-child(1){--a:0deg}.gallery img:nth-child(2){--a:60deg}.gallery img:nth-child(3){--a:120deg}.gallery img:nth-child(4){--a:180deg}.gallery img:nth-child(5){--a:240deg}.gallery img:nth-child(6){--a:300deg}@keyframes spinGallery{0%{transform:perspective(700px) rotateX(-100deg) rotate(0deg)}to{transform:perspective(700px) rotateX(-100deg) rotate(-360deg)}}
+.photo-viewer{position:fixed;inset:0;z-index:1000;background:#08060ee8;backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:30px;opacity:0;visibility:hidden;transition:.35s}.photo-viewer.open{opacity:1;visibility:visible}.photo-viewer img{max-width:94vw;max-height:88vh;width:auto;height:auto;object-fit:contain;border-radius:12px;box-shadow:0 25px 80px #000b}.viewer-close{position:absolute;right:22px;top:18px;width:44px;height:44px;border:1px solid #ffffff55;border-radius:50%;background:#111a;color:#fff;font-size:27px;cursor:pointer}.viewer-prev,.viewer-next{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border:1px solid #ffffff44;border-radius:50%;background:#111a;color:#fff;font-size:25px;cursor:pointer}.viewer-prev{left:20px}.viewer-next{right:20px}.viewer-count{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);font:600 12px Arial,sans-serif;letter-spacing:2px}.back{display:block;width:max-content;margin:25px auto 0;color:#ffd7ee;text-decoration:none;font:600 14px Arial,sans-serif}@media(max-width:700px){body{padding:14px 10px 35px}.card-stage{height:clamp(470px,72vh,600px)}.envelope-wrap{width:92vw;height:min(390px,68vw);min-height:260px}.paper{left:2%;right:2%;top:2%;height:96%;padding:24px 20px}.paper-text{line-height:1.7}.gallery-wrap{min-height:430px}.gallery{--s:125px}.gallery-wrap:after{font-size:10px}}@media(max-width:430px){.card-stage{height:500px}.envelope-wrap{width:94vw;height:300px}.seal{width:58px;height:58px;font-size:24px}.gallery-wrap{min-height:390px}.gallery{--s:105px}.gallery-wrap:after{display:none}}
+</style>
+</head><body><div class="content"><header class="hero"><h1>feliz um mês, princesa.</h1></header><section class="card-stage"><div class="envelope-wrap" id="love-card" role="button" tabindex="0"><div class="envelope"><div class="envelope-body"></div><div class="flap"></div><div class="seal">♥</div><div class="click-label">CLIQUE PARA ABRIR</div><article class="paper"><h2>para você, alissa.</h2><div class="paper-text">desde que nos conhecemos, nunca imaginei que um dia estaríamos aqui. nunca imaginei que você se tornaria o que se tornou na minha vida, mas agradeço todos os dias por nossos caminhos terem se reencontrado e por eu ter tido a chance de te conhecer melhor e poder me apaixonar completamente por você. você foi o inesperado mais esperado, o meu melhor presente.
 
 desde que vc entrou na minha vida, eu me tornei um cara muito mais feliz e completo, minha vida passou a fazer mais sentido. sua companhia se tornou um dos maiores motivos da minha felicidade diária, assim como tudo que envolve você.
 
@@ -90,75 +21,4 @@ obrigado por tudo que vc faz por mim, por me fazer sentir uma prioridade na sua 
 
 eu sou completamente apaixonado por você, alissa. e quanto mais eu te conheço, mais eu percebo que ainda tenho muito pra amar em você.
 
-feliz um mês de nós e da minha felicidade diária. eu te amo pra crl.</div>
-          </article>
-        </div>
-        <div class="open-label">abre a carta</div>
-      </div>
-    </section>
-
-    <section class="media">
-      <div class="video-box">
-        <video controls playsinline preload="metadata"><source src="/edit.mp4" type="video/mp4">seu navegador não conseguiu carregar o vídeo.</video>
-      </div>
-
-      <div class="gallery" id="gallery" aria-label="Galeria de fotos">
-        <div class="gallery-card active" data-index="0"><img src="/foto1.jpeg" alt="Foto nossa 1"><span class="shade"></span><span class="number">01</span><span class="expand-hint">↗</span></div>
-        <div class="gallery-card" data-index="1"><img src="/foto2.jpeg" alt="Foto nossa 2"><span class="shade"></span><span class="number">02</span><span class="expand-hint">↗</span></div>
-        <div class="gallery-card" data-index="2"><img src="/foto3.jpeg" alt="Foto nossa 3"><span class="shade"></span><span class="number">03</span><span class="expand-hint">↗</span></div>
-        <div class="gallery-card" data-index="3"><img src="/foto4.jpeg" alt="Foto nossa 4"><span class="shade"></span><span class="number">04</span><span class="expand-hint">↗</span></div>
-        <div class="gallery-card" data-index="4"><img src="/foto5.jpeg" alt="Foto nossa 5"><span class="shade"></span><span class="number">05</span><span class="expand-hint">↗</span></div>
-        <div class="gallery-card" data-index="5"><img src="/foto6.jpeg" alt="Foto nossa 6"><span class="shade"></span><span class="number">06</span><span class="expand-hint">↗</span></div>
-      </div>
-    </section>
-
-    <div class="photo-viewer" id="photo-viewer" aria-hidden="true">
-      <button class="viewer-close" id="viewer-close" aria-label="Fechar">×</button>
-      <button class="viewer-prev" id="viewer-prev" aria-label="Foto anterior">‹</button>
-      <img id="viewer-image" src="" alt="Foto ampliada">
-      <button class="viewer-next" id="viewer-next" aria-label="Próxima foto">›</button>
-      <div class="viewer-count" id="viewer-count">1 / 6</div>
-    </div>
-
-    <a class="back" href="/">voltar ao início</a>
-  </div>
-
-  <script>
-    const card=document.getElementById('love-card');
-    function openLetter(){card.classList.add('active')}
-    card.addEventListener('click',()=>{if(!card.classList.contains('active'))openLetter()});
-    card.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&!card.classList.contains('active')){e.preventDefault();openLetter()}});
-    const motionQuery=window.matchMedia('(prefers-reduced-motion: reduce)');
-    if(!motionQuery.matches){
-      card.addEventListener('mousemove',e=>{if(card.classList.contains('active'))return;const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;card.style.transform=`perspective(1400px) rotateX(${(0.5-y)*5}deg) rotateY(${(x-0.5)*7}deg) translateY(-4px)`});
-      card.addEventListener('mouseleave',()=>{if(!card.classList.contains('active'))card.style.transform=''})
-    }
-
-    const galleryCards=[...document.querySelectorAll('.gallery-card')];
-    const viewer=document.getElementById('photo-viewer');
-    const viewerImage=document.getElementById('viewer-image');
-    const viewerCount=document.getElementById('viewer-count');
-    let currentPhoto=0;
-    function showPhoto(index){
-      currentPhoto=(index+galleryCards.length)%galleryCards.length;
-      const img=galleryCards[currentPhoto].querySelector('img');
-      viewerImage.src=img.src;viewerImage.alt=img.alt;viewerCount.textContent=`${currentPhoto+1} / ${galleryCards.length}`;
-    }
-    galleryCards.forEach((item,index)=>{
-      item.addEventListener('click',()=>{
-        galleryCards.forEach(c=>c.classList.remove('active'));item.classList.add('active');
-        currentPhoto=index;showPhoto(index);viewer.classList.add('open');viewer.setAttribute('aria-hidden','false');
-      });
-    });
-    document.getElementById('viewer-close').addEventListener('click',()=>{viewer.classList.remove('open');viewer.setAttribute('aria-hidden','true')});
-    document.getElementById('viewer-prev').addEventListener('click',e=>{e.stopPropagation();showPhoto(currentPhoto-1)});
-    document.getElementById('viewer-next').addEventListener('click',e=>{e.stopPropagation();showPhoto(currentPhoto+1)});
-    viewer.addEventListener('click',e=>{if(e.target===viewer)document.getElementById('viewer-close').click()});
-    document.addEventListener('keydown',e=>{
-      if(!viewer.classList.contains('open'))return;
-      if(e.key==='Escape')document.getElementById('viewer-close').click();
-      if(e.key==='ArrowLeft')showPhoto(currentPhoto-1);if(e.key==='ArrowRight')showPhoto(currentPhoto+1);
-    });
-  </script>
-</body>
-</html>
+feliz um mês de nós e da minha felicidade diária. eu te amo pra crl.</div></article></div><div class="open-label">abre a carta</div></div></section><section class="media"><div class="video-box"><video controls playsinline preload="metadata"><source src="/edit.mp4" type="video/mp4">seu navegador não conseguiu carregar o vídeo.</video></div><h2 class="gallery-title">nossas fotos</h2><p class="gallery-subtitle">um pouquinho de nós.</p><div class="gallery-wrap"><div class="gallery" id="gallery"><img src="/foto1.jpeg" alt="Foto nossa 1"><img src="/foto2.jpeg" alt="Foto nossa 2"><img src="/foto3.jpeg" alt="Foto nossa 3"><img src="/foto4.jpeg" alt="Foto nossa 4"><img src="/foto5.jpeg" alt="Foto nossa 5"><img src="/foto6.jpeg" alt="Foto nossa 6"></div></div></section><div class="photo-viewer" id="photo-viewer"><button class="viewer-close" id="viewer-close">×</button><button class="viewer-prev" id="viewer-prev">‹</button><img id="viewer-image" src="" alt="Foto ampliada"><button class="viewer-next" id="viewer-next">›</button><div class="viewer-count" id="viewer-count">1 / 6</div></div><a class="back" href="/">voltar ao início</a></div><script>const card=document.getElementById('love-card');function openLetter(){card.classList.add('active')}card.addEventListener('click',()=>{if(!card.classList.contains('active'))openLetter()});card.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&!card.classList.contains('active')){e.preventDefault();openLetter()}});const imgs=[...document.querySelectorAll('.gallery img')],viewer=document.getElementById('photo-viewer'),viewerImage=document.getElementById('viewer-image'),count=document.getElementById('viewer-count');let current=0;function show(i){current=(i+imgs.length)%imgs.length;viewerImage.src=imgs[current].src;viewerImage.alt=imgs[current].alt;count.textContent=`${current+1} / ${imgs.length}`}imgs.forEach((img,i)=>img.addEventListener('click',()=>{show(i);viewer.classList.add('open')}));document.getElementById('viewer-close').onclick=()=>viewer.classList.remove('open');document.getElementById('viewer-prev').onclick=()=>show(current-1);document.getElementById('viewer-next').onclick=()=>show(current+1);viewer.onclick=e=>{if(e.target===viewer)viewer.classList.remove('open')};document.addEventListener('keydown',e=>{if(!viewer.classList.contains('open'))return;if(e.key==='Escape')viewer.classList.remove('open');if(e.key==='ArrowLeft')show(current-1);if(e.key==='ArrowRight')show(current+1)});</script></body></html>
